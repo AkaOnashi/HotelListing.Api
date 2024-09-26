@@ -26,13 +26,13 @@ builder.Services.AddCors(options => {
 });
 
 builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
-var app = builder.Build();
-
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 // Configure the HTTP request pipeline.
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICountriesRepository, CountriesRepository>();
+
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
