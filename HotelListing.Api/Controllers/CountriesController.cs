@@ -46,7 +46,6 @@ namespace HotelListing.Api.Controllers
             }
 
             var record = _mapper.Map<CountryDto>(country);
-
             return Ok(record);
         }
 
@@ -102,6 +101,7 @@ namespace HotelListing.Api.Controllers
 
             var country = _mapper.Map<Country>(createCountryDto);
 
+            await _countriesRepository.AddAsync(country);
             await _countriesRepository.AddAsync(country);
 
             return CreatedAtAction("GetCountry", new { id = country.Id }, country);
